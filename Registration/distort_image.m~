@@ -16,15 +16,11 @@ function result=distort_image(I,type)
         title('sinusoid');
         result = I_sinusoid;
     elseif type==2
-        [nrows,ncols] = size(I);
-        [xi,yi] = meshgrid(1:ncols,1:nrows);
-        imid = round(size(I,2)/2);
-        resamp = makeresampler('linear','fill');
         % radial pin cushion distortion
         xt = xi(:) - imid;
         yt = yi(:) - imid;
         [theta,r] = cart2pol(xt,yt);
-        a = -.00001; % Try varying the amplitude of the cubic term.
+        a = -.0005; % Try varying the amplitude of the cubic term.
         s = r + a*r.^3;
         [ut,vt] = pol2cart(theta,s);
         u = reshape(ut,size(xi)) + imid;

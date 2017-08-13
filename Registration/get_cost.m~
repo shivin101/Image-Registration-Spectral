@@ -1,0 +1,10 @@
+function cost = get_cost(eig1,eig2,img1,img2)
+    for i=1:size(eig1,2)
+        for j=1:size(eig2,2)
+            histo1=hist3([img1,eig1(:,i)],[20,20]);
+            histo2=hist3([img2,eig2(:,j)],[20,20]);
+            cost(i,j)=sqrt(mean((eig1(:,i)-eig2(:,j)).^2))+(histo1-histo2).^2;
+            
+        end
+    end
+end
